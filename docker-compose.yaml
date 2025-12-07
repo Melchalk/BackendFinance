@@ -1,0 +1,11 @@
+services:
+  postgresql:
+    image: postgres
+    restart: always
+    container_name: finance-postgres
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=finance"
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    ports:
+      - 15432:5432

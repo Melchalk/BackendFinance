@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path="docker-compose.yaml" />
+  </Folder>
+  <Project Path="BackendFinance/BackendFinance.csproj" />
+</Solution>
