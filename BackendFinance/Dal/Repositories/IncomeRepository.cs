@@ -12,7 +12,7 @@ public class IncomeRepository(IOptions<DalOptions> dalSettings) : PgRepository(d
     {
         const string sqlQuery =
             """
-            insert into incomes (amount) values (@Amount)
+            insert into incomes (amount, created_at) values (@Amount, @CreatedAt)
             returning id;
             """;
 
@@ -22,7 +22,8 @@ public class IncomeRepository(IOptions<DalOptions> dalSettings) : PgRepository(d
                 sqlQuery,
                 new
                 {
-                    income.Amount
+                    income.Amount,
+                    income.CreatedAt,
                 },
                 cancellationToken: token));
 

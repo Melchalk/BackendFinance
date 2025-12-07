@@ -2,6 +2,7 @@
 using BackendFinance.Dal.Extensions;
 using BackendFinance.Dal.Repositories;
 using BackendFinance.Dal.Repositories.Interfaces;
+using BackendFinance.Middlewares;
 using BackendFinance.Swagger;
 using FluentMigrator.Runner;
 
@@ -44,6 +45,8 @@ public class Startup(IConfiguration configuration)
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseCors("CorsPolicy");
+
+        app.UseMiddleware<RequestLoggingMiddleware>();
 
         app.UseHttpsRedirection();
 

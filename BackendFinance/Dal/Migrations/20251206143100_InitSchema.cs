@@ -9,11 +9,13 @@ public class InitSchema : Migration
     {
         Create.Table("incomes")
             .WithColumn("id").AsInt32().PrimaryKey("incomes_pk").Identity()
-            .WithColumn("amount").AsInt32().NotNullable();
+            .WithColumn("amount").AsInt32().NotNullable()
+            .WithColumn("created_at").AsDateTimeOffset().NotNullable();
 
         Create.Table("expenses")
             .WithColumn("id").AsInt32().PrimaryKey("expenses_pk").Identity()
-            .WithColumn("amount").AsInt32().NotNullable();
+            .WithColumn("amount").AsInt32().NotNullable()
+            .WithColumn("created_at").AsDateTimeOffset().NotNullable();
     }
 
     public override void Down()

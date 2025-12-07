@@ -42,7 +42,10 @@ public class TransactionsService(
             {
                 Id = e.Id,
                 Amount = e.Amount,
-            }).ToArray()
+                CreatedAt = DateOnly.FromDateTime(e.CreatedAt.ToLocalTime().DateTime),
+            })
+            .OrderByDescending(e => e.CreatedAt)
+            .ToArray()
         };
     }
 
@@ -56,20 +59,31 @@ public class TransactionsService(
             {
                 Id = e.Id,
                 Amount = e.Amount,
-            }).ToArray()
+                CreatedAt = DateOnly.FromDateTime(e.CreatedAt.ToLocalTime().DateTime),
+            })
+            .OrderByDescending(e => e.CreatedAt)
+            .ToArray()
         };
     }
 
     public async Task<int> AddExpense(int amount, CancellationToken token)
     {
-        var expense = new ExpenseEntityV1 { Amount = amount };
+        var expense = new ExpenseEntityV1
+        {
+            Amount = amount,
+            CreatedAt = DateTimeOffset.UtcNow
+        };
 
         return await expenseRepository.Add(expense, token);
     }
 
     public async Task<int> AddIncome(int amount, CancellationToken token)
     {
-        var incomes = new IncomeEntityV1 { Amount = amount }; 
+        var incomes = new IncomeEntityV1
+        {
+            Amount = amount,
+            CreatedAt = DateTimeOffset.UtcNow
+        }; 
 
         return await incomeRepository.Add(incomes, token);
     }

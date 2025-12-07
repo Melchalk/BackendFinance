@@ -12,7 +12,7 @@ public class ExpenseRepository(IOptions<DalOptions> dalSettings) : PgRepository(
     {
         const string sqlQuery =
             """
-            insert into expenses (amount) values (@Amount)
+            insert into expenses (amount, created_at) values (@Amount, @CreatedAt)
             returning id;
             """;
 
@@ -22,7 +22,8 @@ public class ExpenseRepository(IOptions<DalOptions> dalSettings) : PgRepository(
                 sqlQuery,
                 new
                 {
-                    expense.Amount
+                    expense.Amount,
+                    expense.CreatedAt,
                 },
                 cancellationToken: token));
 
